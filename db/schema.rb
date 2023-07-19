@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_19_195554) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_19_204737) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -37,4 +37,63 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_19_195554) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.string "information"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.string "name"
+    t.integer "category_id"
+    t.string "information"
+    t.decimal "price"
+    t.string "image"
+    t.decimal "discount"
+    t.datetime "last_update"
+    t.datetime "date_create"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "user_id"
+    t.datetime "last_update"
+    t.datetime "date_create"
+    t.decimal "discount"
+    t.integer "status_id"
+    t.integer "tax_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "statuses", force: :cascade do |t|
+    t.string "name"
+    t.string "information"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "taxes", force: :cascade do |t|
+    t.string "tax_region"
+    t.decimal "PST"
+    t.decimal "GST"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email"
+    t.string "password"
+    t.string "role"
+    t.string "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "items", "categories"
+  add_foreign_key "orders", "statuses"
+  add_foreign_key "orders", "taxes"
+  add_foreign_key "orders", "users"
 end
