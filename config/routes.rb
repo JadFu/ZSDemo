@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   resources :items
+  get 'items/category/:category', to: 'items#category', as: :items_category
+
 end

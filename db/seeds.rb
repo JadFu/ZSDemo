@@ -36,3 +36,27 @@ categories.each do |category|
     )
   end
 end
+
+laptop_category = Category.find_by(name: 'laptop')
+  Item.create(
+    name: Faker::Device.model_name,
+    category: laptop_category,
+    information: "testing items",
+    price: Faker::Number.between(from: 1, to: 1000),
+    image: 'noItem.jpg',
+    discount: 10,
+    last_update: Time.now,
+    date_create: Time.now
+  )
+
+parts_category = Category.find_by(name: 'parts')
+  Item.create(
+    name: Faker::Device.model_name,
+    category: parts_category,
+    information: "testing items",
+    price: Faker::Number.between(from: 1, to: 1000),
+    image: 'noItem.jpg',
+    discount: 0,
+    last_update: Time.now,
+    date_create: 10.days.ago
+  )
