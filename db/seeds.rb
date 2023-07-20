@@ -23,7 +23,7 @@ Category.create!([
 categories = Category.all
 
 categories.each do |category|
-  10.times do
+  20.times do
     Item.create!(
       name: Faker::Commerce.product_name,
       category_id: category.id,
@@ -38,6 +38,7 @@ categories.each do |category|
 end
 
 laptop_category = Category.find_by(name: 'laptop')
+2.times do
   Item.create(
     name: Faker::Device.model_name,
     category: laptop_category,
@@ -48,8 +49,10 @@ laptop_category = Category.find_by(name: 'laptop')
     last_update: Time.now,
     date_create: Time.now
   )
+end
 
 parts_category = Category.find_by(name: 'parts')
+3.times do
   Item.create(
     name: Faker::Device.model_name,
     category: parts_category,
@@ -60,3 +63,4 @@ parts_category = Category.find_by(name: 'parts')
     last_update: Time.now,
     date_create: 10.days.ago
   )
+end
