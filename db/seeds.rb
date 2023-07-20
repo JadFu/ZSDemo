@@ -5,4 +5,34 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+# AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+require 'faker'
+
+Item.delete_all
+Category.delete_all
+
+
+Category.create!([
+  { name: 'laptop', information: 'laptop' },
+  { name: 'desktop', information: 'desktop pre-builds' },
+  { name: 'parts', information: 'computer parts and accessories' },
+  { name: 'devices', information: 'mice, keyboard, headphones, monitors and other' },
+  { name: 'custom_builds', information: 'custom pre-builds' },
+])
+
+categories = Category.all
+
+categories.each do |category|
+  10.times do
+    Item.create!(
+      name: Faker::Commerce.product_name,
+      category_id: category.id,
+      information: "testing items",
+      price: Faker::Number.between(from: 1, to: 1000),
+      image: 'noItem.jpg',
+      discount: 0,
+      last_update: Time.now,
+      date_create: Time.now
+    )
+  end
+end

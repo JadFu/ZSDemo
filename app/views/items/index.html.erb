@@ -1,0 +1,22 @@
+<h1>All Items</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Category</th>
+      <th>Price</th>
+      <th>Information</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= item.name %></td>
+        <td><%= item.category.name %></td>
+        <td><%= item.price %></td>
+        <td><%= item.information %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
