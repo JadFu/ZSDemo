@@ -1,25 +1,25 @@
 class ItemsController < ApplicationController
     def index
         @items = Item.all
-      
+
+        if params[:category_id]
+          category = Category.find_by(id: params[:category_id])
+          @items = @items.where(category: category)
+        end
+
         if params[:keyword].present?
             keyword = params[:keyword].downcase
             @items = @items.where("LOWER(name) LIKE ?", "%#{keyword}%")
         end
-
-        if params[:category]
-          category = Category.find_by(name: params[:category])
-          @items = @items.where(category: category)
-        end
       
-        if params[:search_factor] == 'new'
+        if params[:search_factor] == 'all'
+            # No specific filter applied, show all items
+        elsif params[:search_factor] == 'new'
             @items = @items.where('date_create >= ?', 3.days.ago)
         elsif params[:search_factor] == 'recent'
             @items = @items.where('last_update >= ?', 3.days.ago)
         elsif params[:search_factor] == 'for_sale'
             @items = @items.where('discount > ?', 0)
-        else
-            @items = @items
         end
       
         @items = @items.page(params[:page]).per(10)
@@ -43,14 +43,20 @@ class ItemsController < ApplicationController
     private
 
     def search_items
-        search_params = {
-          keyword: params[:keyword],
-          category_id: params[:category_id],
-          for_sale: params[:for_sale],
-          search_factor: params[:search_factor]
-        }
+        keyword = params[:keyword].presence
+        category_id = params[:category_id].presence
+        category_id = nil if category_id == 'all'
       
-        redirect_to items_path(search_params.compact)
+        search_factor = params[:search_factor].presence
+        search_factor = nil if search_factor == 'all'
+      
+        search_params = {
+          keyword: keyword,
+          category_id: category_id,
+          search_factor: search_factor
+        }.compact
+      
+        redirect_to items_path(search_params)
     end
       
 
