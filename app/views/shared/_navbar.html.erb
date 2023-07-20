@@ -1,0 +1,32 @@
+<nav>
+  <div>
+    <a href="/items">ZS Tech Services</a>
+    <ul>
+      <li>
+        <a href="/about">About</a>
+      </li>
+      <li>
+        <a href="/contact">Contact Us</a>
+      </li>
+    </ul>
+  </div>
+
+  <div>
+    <%= form_tag("/items/search", method: "get") do %>
+      <div>
+        <div>
+            <%= text_field_tag :keyword, params[:keyword], class: "form-control", placeholder: "Item Search" %>
+        </div>
+        <div>
+            <%= select_tag :category_id, options_for_select([['All', 'all']] + Category.all.pluck(:name, :id), params[:category_id]), class: "form-control" %>
+        </div>
+        <div>
+            <%= select_tag :search_factor, options_for_select([['All', 'all'], ['For Sale', 'for_sale'], ['Recent Update', 'recent'], ['New', 'new']], params[:search_factor]), class: "form-control" %>
+        </div>
+        <div>
+            <%= submit_tag "Search", class: "btn btn-primary", data: { disable_with: "Search" } %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</nav>
