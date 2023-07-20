@@ -12,13 +12,14 @@
   <tbody>
     <% @items.each do |item| %>
       <tr>
-        <td><%= item.name %></td>
-        <td><%= item.category.name %></td>
-        <td><%= item.price %></td>
-        <td><%= item.information %></td>
+        <td><%= link_to item.name, item_path(item) %></td>
+        <td><%= link_to item.category.name, item_path(item) %></td>
+        <td><%= link_to item.price, item_path(item) %></td>
+        <td><%= link_to item.information, item_path(item) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <%= paginate @items %>
+

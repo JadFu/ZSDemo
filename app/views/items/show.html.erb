@@ -1,0 +1,9 @@
+<h1><%= @item.name %></h1>
+<p><%= @item.information %></p>
+<p>Price: <%= @item.price %></p>
+<p>Category: <%= @item.category.name %></p>
+<p>Last update: <%= @item.last_update.strftime("%B %d, %Y") %></p> <!-- formats the date -->
+<p>Discount: <%= @item.discount %> %</p>
+<p><%= image_tag(asset_path(@item.image), alt: @item.name) %></p> <!-- display the item image -->
+<%= link_to 'Back to Items', items_path %>
+
