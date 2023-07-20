@@ -26,8 +26,8 @@ class ItemsController < ApplicationController
     end
 
     def category
-        @category = Category.find_by(name: params[:category])
-        @items = @category.items.page(params[:page]).per(5)
+        @category = Category.find(params[:id])
+        @items = Item.where(category: @category).page(params[:page]).per(10)
     end
 
     def show

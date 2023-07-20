@@ -1,6 +1,13 @@
 <nav>
   <div>
-    <a href="/items">ZS Tech Services</a>
+    <a href="/items"><h1>ZS Tech Services<h1></a>
+    <ul>
+        <% Category.all.each do |category| %>
+            <li>
+                <a href="<%= items_category_path(category.id) %>"><%= category.name %></a>
+            </li>
+        <% end %>
+    </ul>
     <ul>
       <li>
         <a href="/about">About</a>
