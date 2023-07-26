@@ -283,6 +283,7 @@ DEPENDENCIES
   kaminari
   puma (~> 5.0)
   rails (~> 7.0.5)
+  ransack
   sassc
   selenium-webdriver
   sprockets-rails
