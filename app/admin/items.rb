@@ -15,9 +15,16 @@ ActiveAdmin.register Item do
     form do |f|
       f.inputs do
         f.input :name
+        f.input :category
         f.input :information
         f.input :price
+        f.input :image
+        f.input :discount
       end
       f.actions
+    end
+  
+    before_save do |item|
+      item.last_update = Time.now
     end
   end
