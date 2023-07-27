@@ -7,6 +7,7 @@
       <th>Category</th>
       <th>Price</th>
       <th>Information</th>
+      <th>Add to Cart</th>
     </tr>
   </thead>
   <tbody>
@@ -16,10 +17,15 @@
         <td><%= link_to item.category.name, item_path(item) %></td>
         <td><%= link_to item.price, item_path(item) %></td>
         <td><%= link_to item.information, item_path(item) %></td>
+        <td>
+          <%= button_to 'Add to Cart', add_to_cart_path(item), method: :post, remote: true, class: 'btn btn-primary' %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <%= paginate @items %>
+
+
 

@@ -3,6 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.1.2"
 
+# webpacker
+gem 'webpacker'
+
 # paginated
 gem 'kaminari'
 

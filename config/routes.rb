@@ -8,5 +8,7 @@ Rails.application.routes.draw do
 
   resources :items
   get 'items/category/:id', to: 'items#category', as: :items_category
-
+  get '/cart', to: 'carts#show', as: 'cart'
+  get 'checkout', to: 'carts#checkout'
+  post '/add_to_cart/:id', to: 'carts#add_to_cart', as: :add_to_cart
 end
