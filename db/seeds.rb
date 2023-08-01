@@ -10,6 +10,7 @@ require 'faker'
 
 Item.delete_all
 Category.delete_all
+Tax.delete_all
 
 
 Category.create!([
@@ -62,5 +63,17 @@ parts_category = Category.find_by(name: 'parts')
     discount: 0,
     last_update: Time.now,
     date_create: 10.days.ago
+  )
+end
+
+def random_decimal(range)
+  rand(range) / 100.0
+end
+
+10.times do
+  Tax.create!(
+    tax_region: Faker::Address.unique.state_abbr, # Using two capital letters like 'MB'
+    PST: random_decimal(1..5), # Generating random decimal between 1% to 5%
+    GST: random_decimal(1..5) # Generating random decimal between 1% to 5%
   )
 end

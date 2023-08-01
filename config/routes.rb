@@ -11,4 +11,9 @@ Rails.application.routes.draw do
   get '/cart', to: 'carts#show', as: 'cart'
   get 'checkout', to: 'carts#checkout'
   post '/add_to_cart/:id', to: 'carts#add_to_cart', as: :add_to_cart
+
+  #user sign_up
+  root to: 'users#new'
+  get '/sign_up', to: 'users#new'
+  post '/sign_up', to: 'users#create'
 end
