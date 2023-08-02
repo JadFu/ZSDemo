@@ -1,5 +1,6 @@
 class User < ApplicationRecord
     has_many :orders
+    belongs_to :tax
 
     # add validations here
     validates :email, presence: true, uniqueness: true

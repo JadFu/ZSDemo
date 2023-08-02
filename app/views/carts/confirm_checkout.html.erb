@@ -1,0 +1,39 @@
+<!-- app/views/carts/confirm_checkout.html.erb -->
+<h1>Confirm Checkout</h1>
+
+<h2>Items in Checkout List</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Item Name</th>
+      <th>Quantity</th>
+      <th>Individual Item Price</th>
+      <th>Total Price Before Tax</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cart_items.each do |item_id, quantity| %>
+      <% item = Item.find(item_id) %>
+      <tr>
+        <td><%= item.name %></td>
+        <td><%= quantity %></td>
+        <td><%= number_to_currency(item.price) %></td>
+        <td><%= number_to_currency(item.price * quantity) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h2>Checkout Information</h2>
+<p><strong>Email:</strong> <%= @user.email %></p>
+<p><strong>Address:</strong> <%= @user.address %></p>
+<p><strong>Tax Region:</strong> <%= @tax.tax_region %></p>
+
+<h2>Order Summary</h2>
+<p>Total Price Before Tax: <%= number_to_currency(@total_price_before_tax) %></p>
+<p>GST Amount: <%= number_to_currency(@total_gst) %></p>
+<p>PST Amount: <%= number_to_currency(@total_pst) %></p>
+<p>Total Price After Tax: <%= number_to_currency(@total_price_after_tax) %></p>
+
+<%= link_to 'Confirm Checkout', confirm_checkout_path, method: :post, class: 'btn btn-primary' %>
+<%= link_to 'Back to Cart', cart_path, class: 'btn btn-secondary' %>
