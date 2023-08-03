@@ -6,5 +6,4 @@ class OrderItem < ApplicationRecord
     # add validations here
     validates :price_ATM, presence: true
     validates :quantity, presence: true
-    validates :order_id, uniqueness: { scope: :item_id }
 end

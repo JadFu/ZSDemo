@@ -1,0 +1,21 @@
+<% if @user %>
+  <h1>Welcome <%= @user.email %>!</h1>
+
+  <h2>Your Orders</h2>
+  <% if @orders.any? %>
+  <ul>
+    <% @orders.each do |order| %>
+      <li>
+        <%= link_to "Order ##{order.id}", order_path(order.id) %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>You have no orders.</p>
+<% end %>
+
+  <%= link_to 'Back to Items', items_path, class: 'btn btn-secondary' %>
+<% else %>
+  <p>Please log in to view this page.</p>
+  <%= link_to 'Log in', login_path %>
+<% end %>

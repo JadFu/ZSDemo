@@ -12,6 +12,8 @@ Item.delete_all
 Category.delete_all
 Tax.delete_all
 User.delete_all
+Order.delete_all
+OrderItem.delete_all
 
 def random_decimal(range)
   rand(range) / 100.0

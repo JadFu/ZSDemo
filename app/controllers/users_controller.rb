@@ -15,6 +15,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    if session[:user_id]
+      @user = User.find(session[:user_id])
+      @orders = @user.orders
+    else
+      redirect_to login_path, alert: 'Please log in to view this page.'
+    end
+  end
+
   private
 
   def user_params

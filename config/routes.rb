@@ -25,8 +25,7 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy', as: :logout
 
-  # Orders
-  get '/checkout', to: 'orders#new', as: 'new_order'
-  post '/checkout', to: 'orders#create', as: 'create_order'
-  get '/orders/:id', to: 'orders#show', as: 'order'
+  # user page
+  resources :orders, only: [:show]
+  get '/users/:id', to: 'users#show', as: 'user'
 end
