@@ -8,6 +8,9 @@ class SessionsController < ApplicationController
   
       if user&.password == params[:password]
         session[:user_id] = user.id
+        session[:user_email] = user.email
+        session[:user_address] = user.address
+        session[:user_tax] = user.tax_id
         redirect_to root_path, notice: 'Logged in successfully.'
       else
         flash.now[:alert] = 'Invalid email or password.'

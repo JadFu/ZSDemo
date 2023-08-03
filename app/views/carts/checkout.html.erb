@@ -29,16 +29,32 @@
         </div>
         
         <div class="user-info">
-          <%= form_with(model: @user, url: confirm_checkout_path) do |form| %>
-            <%= form.label :email %>
-            <%= form.email_field :email, required: true %>
+            <% if session[:user_id] %>
+                <%= form_with(model: @user, url: confirm_checkout_path) do |form| %>
+                <%= form.label :email %>
+                <%= form.email_field :email, required: true, value: session[:user_email] %>
 
-            <%= form.label :address %>
-            <%= form.text_area :address, required: true %>
+                <%= form.label :address %>
+                <%= form.text_area :address, required: true, value: session[:user_address] %>
 
-            <%= label_tag :tax_id, 'Tax Region' %>
-            <%= select_tag 'user[tax_id]', options_for_select(Tax.pluck(:tax_region, :id)), required: true %>
+                <%= label_tag :tax_id, 'Tax Region' %>
+                <%= select_tag 'user[tax_id]', options_for_select(Tax.pluck(:tax_region, :id), session[:user_tax]), required: true %>
 
-            <%= form.submit 'Confirm Checkout' %>
-        <% end %>
-        </div>
+                <%= form.submit 'Confirm Checkout' %>
+                <% end %>
+            <% else %>
+                <!-- Render the form for users who are not logged in -->
+                <%= form_with(model: @user, url: confirm_checkout_path) do |form| %>
+                <%= form.label :email %>
+                <%= form.email_field :email, required: true %>
+
+                <%= form.label :address %>
+                <%= form.text_area :address, required: true %>
+
+                <%= label_tag :tax_id, 'Tax Region' %>
+                <%= select_tag 'user[tax_id]', options_for_select(Tax.pluck(:tax_region, :id)), required: true %>
+
+                <%= form.submit 'Confirm Checkout' %>
+                <% end %>
+            <% end %>
+</div>
