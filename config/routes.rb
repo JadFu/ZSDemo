@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
+  root to:'items#index'
+
   resources :items
   get 'items/category/:id', to: 'items#category', as: :items_category
   get '/cart', to: 'carts#show', as: 'cart'

@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
     if @user.save
       # Handle successful sign-up (e.g., redirect to a dashboard)
-      redirect_to item_path, notice: 'Sign up successful!'
+      redirect_to root_path, notice: 'Sign up successful!'
     else
       # Handle sign-up validation errors
       render :new
