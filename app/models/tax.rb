@@ -1,5 +1,4 @@
 class Tax < ApplicationRecord
-    has_many :orders
     has_many :users
 
     # add validations here

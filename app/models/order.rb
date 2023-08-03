@@ -4,6 +4,5 @@ class Order < ApplicationRecord
     # add associations here
     belongs_to :user
     belongs_to :status
-    belongs_to :tax
   
 end

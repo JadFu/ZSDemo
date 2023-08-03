@@ -24,4 +24,9 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy', as: :logout
+
+  # Orders
+  get '/checkout', to: 'orders#new', as: 'new_order'
+  post '/checkout', to: 'orders#create', as: 'create_order'
+  get '/orders/:id', to: 'orders#show', as: 'order'
 end
