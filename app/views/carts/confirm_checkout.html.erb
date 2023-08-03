@@ -33,6 +33,7 @@
 <p>Total Price Before Tax: <%= number_to_currency(@total_price_before_tax) %></p>
 <p>GST Amount: <%= number_to_currency(@total_gst) %></p>
 <p>PST Amount: <%= number_to_currency(@total_pst) %></p>
+<p>HST Amount: <%= number_to_currency(@total_hst) %></p>
 <p>Total Price After Tax: <%= number_to_currency(@total_price_after_tax) %></p>
 
 <%= link_to 'Confirm Checkout', confirm_checkout_path, method: :post, class: 'btn btn-primary' %>

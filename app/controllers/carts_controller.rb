@@ -2,16 +2,6 @@ class CartsController < ApplicationController
     def show
       @cart_items = session[:cart] || {}
     end
-
-    def confirm_checkout
-      @user = User.new(user_params)
-      @tax = Tax.find_by(tax_region: params[:tax_region])
-      @cart_items = session[:cart] || {}
-      @total_price_before_tax = calculate_total_price_before_tax(@cart_items) # Pass cart_items to the method
-      @total_gst = @total_price_before_tax * @tax.GST
-      @total_pst = @total_price_before_tax * @tax.PST
-      @total_price_after_tax = calculate_total_price_after_tax
-    end
   
     def add_to_cart
       id = params[:id]
@@ -31,9 +21,10 @@ class CartsController < ApplicationController
       @user = User.new(user_params)
       @tax = Tax.find(params[:user][:tax_id])
       @cart_items = session[:cart] || {}
-      @total_price_before_tax = calculate_total_price_before_tax(@cart_items) # Pass cart_items to the method
+      @total_price_before_tax = calculate_total_price_before_tax(@cart_items)
       @total_gst = @total_price_before_tax * @tax.GST
       @total_pst = @total_price_before_tax * @tax.PST
+      @total_hst = @total_price_before_tax * @tax.HST
       @total_price_after_tax = calculate_total_price_after_tax
     end
 
@@ -67,7 +58,7 @@ class CartsController < ApplicationController
     end
   
     def calculate_total_price_after_tax
-      total_price_after_tax = @total_price_before_tax * (1 + @tax.GST + @tax.PST)
+      total_price_after_tax = @total_price_before_tax * (1 + @tax.GST + @tax.PST + @tax.HST)
       total_price_after_tax
     end
 end

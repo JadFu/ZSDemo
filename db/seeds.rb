@@ -11,7 +11,11 @@ require 'faker'
 Item.delete_all
 Category.delete_all
 Tax.delete_all
+User.delete_all
 
+def random_decimal(range)
+  rand(range) / 100.0
+end
 
 Category.create!([
   { name: 'laptop', information: 'laptop' },
@@ -66,14 +70,28 @@ parts_category = Category.find_by(name: 'parts')
   )
 end
 
-def random_decimal(range)
-  rand(range) / 100.0
-end
+tax_rates = {
+  "AB" => { PST: 0.00, GST: 0.05, HST: 0.00 }, # Alberta
+  "BC" => { PST: 0.07, GST: 0.05, HST: 0.00 }, # British Columbia
+  "MB" => { PST: 0.07, GST: 0.05, HST: 0.00 }, # Manitoba
+  "NB" => { PST: 0.00, GST: 0.00, HST: 0.15 }, # New Brunswick
+  "NL" => { PST: 0.00, GST: 0.00, HST: 0.15 }, # Newfoundland and Labrador
+  "NS" => { PST: 0.00, GST: 0.00, HST: 0.15 }, # Nova Scotia
+  "ON" => { PST: 0.00, GST: 0.00, HST: 0.13 }, # Ontario
+  "PE" => { PST: 0.00, GST: 0.00, HST: 0.15 }, # Prince Edward Island
+  "QC" => { PST: 0.09975, GST: 0.05, HST: 0.00 }, # Quebec
+  "SK" => { PST: 0.06, GST: 0.05, HST: 0.00 }, # Saskatchewan
+  "NT" => { PST: 0.00, GST: 0.05, HST: 0.00 }, # Northwest Territories
+  "NU" => { PST: 0.00, GST: 0.05, HST: 0.00 }, # Nunavut
+  "YT" => { PST: 0.00, GST: 0.05, HST: 0.00 }  # Yukon
+}
 
-10.times do
+# Create tax information for each province and territory
+tax_rates.each do |tax_region, rates|
   Tax.create!(
-    tax_region: Faker::Address.unique.state_abbr, # Using two capital letters like 'MB'
-    PST: random_decimal(1..5), # Generating random decimal between 1% to 5%
-    GST: random_decimal(1..5) # Generating random decimal between 1% to 5%
+    tax_region: tax_region,
+    PST: rates[:PST],
+    GST: rates[:GST],
+    HST: rates[:HST]
   )
 end

@@ -10,9 +10,6 @@
   <%= form.label :tax_id %>
   <%= form.collection_select :tax_id, Tax.all, :id, :tax_region %>
 
-  <%= form.label :role %>
-  <%= form.text_field :role %>
-
   <%= form.label :address %>
   <%= form.text_area :address %>
 

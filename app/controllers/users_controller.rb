@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
     if @user.save
       # Handle successful sign-up (e.g., redirect to a dashboard)
-      redirect_to root_path, notice: 'Sign up successful!'
+      redirect_to item_path, notice: 'Sign up successful!'
     else
       # Handle sign-up validation errors
       render :new
@@ -18,6 +18,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :role, :address, :tax_id)
+    params.require(:user).permit(:email, :password, :address, :tax_id)
   end
 end

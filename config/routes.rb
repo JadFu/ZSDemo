@@ -15,7 +15,6 @@ Rails.application.routes.draw do
   end
 
   # user sign_up
-  root to: 'users#new'
   get '/sign_up', to: 'users#new'
   post '/sign_up', to: 'users#create'
 end
