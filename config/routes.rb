@@ -19,4 +19,9 @@ Rails.application.routes.draw do
   # user sign_up
   get '/sign_up', to: 'users#new'
   post '/sign_up', to: 'users#create'
+
+  # user login/out
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy'
 end
