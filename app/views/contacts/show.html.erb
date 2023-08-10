@@ -1,0 +1,17 @@
+<div class="container mt-4">
+  <h1><%= @contact.title %></h1>
+  
+  <h2>Social Links</h2>
+  <div><%= @contact.social_links.html_safe %></div>
+
+  <h2>Contact Details</h2>
+  <div><%= @contact.contact_details.html_safe %></div>
+
+  <h2>Our Team</h2>
+  <div><%= @contact.team_details.html_safe %></div>
+
+  <footer class="mt-4 text-center">
+      <p>&copy; <%= Time.now.year %> ZS Tech. No rights reserved Yet.</p>
+  </footer>
+</div>
+

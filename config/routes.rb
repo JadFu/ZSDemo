@@ -16,8 +16,9 @@ Rails.application.routes.draw do
 
   root to:'items#index'
 
-  get 'contact', to: 'pages#contact'
-  get 'about', to: 'pages#about'
+  get 'about', to: 'abouts#show', as: :about
+  get 'contact', to: 'contacts#show', as: :contact
+
 
   resources :items
   resources :taxes

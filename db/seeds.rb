@@ -98,3 +98,26 @@ tax_rates.each do |tax_region, rates|
     HST: rates[:HST]
   )
 end
+
+# Create About Content
+About.create!(
+  title: "About ZS Tech Services LTD",
+  content: "<p>Currently, ZS Tech relies heavily on third-party retail sites such as Amazon, Kijiji, Instagram, and Facebook Marketplace for advertising their custom desktop builds and retail information. However, the company's owner finds it time-consuming to manage product posts on different platforms. Therefore, developing an e-commerce store that consolidates all the products and builds, currently scattered across various sites, would significantly save time. Additionally, it would provide customers with a comprehensive product catalogue, eliminating the need to call or email ZS Tech and wait for a response.</p>
+            <p>The target demographic for this online store includes students, employees, PC gamers, and anyone interested in building a new desktop computer, purchasing specific hardware components, or booking PC troubleshooting services.</p>"
+)
+
+# Create Contact Content
+Contact.create!(
+  title: "Contact Us",
+  social_links: "<ul class=\"list-unstyled\">
+                    <li><a href=\"http://fake-zs-tech-ins.com\">ZS Tech Instagram</a></li>
+                    <li><a href=\"http://fake-zs-tech-youtube.com\">ZS Tech YouTube Channel</a></li>
+                    <li><a href=\"http://fake-zs-tech-official.com\">ZS Tech Official Page</a></li>
+                  </ul>",
+  contact_details: "<p>Phone: (123) 456-7890</p>
+                    <p>Email: <a href=\"mailto:contact@fake-zstech.com\">contact@fake-zstech.com</a></p>",
+  team_details: "<ul class=\"list-unstyled\">
+                    <li>John Doe - Phone: (111) 222-3333, Email: <a href=\"mailto:john.doe@fake-zstech.com\">john.doe@fake-zstech.com</a></li>
+                    <li>Jane Smith - Phone: (444) 555-6666, Email: <a href=\"mailto:jane.smith@fake-zstech.com\">jane.smith@fake-zstech.com</a></li>
+                  </ul>"
+)
