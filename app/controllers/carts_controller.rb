@@ -17,22 +17,6 @@ class CartsController < ApplicationController
       @cart_items = session[:cart] || {}
       @user = User.new
       @taxes = Tax.all
-
-      if session[:user_id]
-        timemark = Time.current
-        @order = Order.new(user_id: session[:user_id], status_id: Status.find_by(name: 'new').id, discount: 0, date_create: timemark)
-        if @order.save
-          @createdOrder = Order.find_by(date_create: timemark)
-          @cart_items.each do |item_id, quantity|
-            item = Item.find(item_id)
-            order_item = OrderItem.create(order_id: @createdOrder.id, item_id: item.id, price_ATM: item.price, quantity: quantity)
-          end
-          puts "Order created"
-        else
-          puts "Failed to create order."
-          redirect_to cart_path, alert: 'Failed to create order.'
-        end
-      end
     end
 
     def confirm_checkout
@@ -84,7 +68,7 @@ class CartsController < ApplicationController
       end
     end
 
-    def payment_success
+    def success
       @cart_items = session[:cart] || {}
     
       if session[:user_id]

@@ -20,6 +20,9 @@ Rails.application.routes.draw do
     get :confirm_checkout, on: :member, as: :confirm_checkout # Route for confirm_checkout.html.erb
   end
 
+  # payment
+  get '/carts/success', to: 'carts#success'
+
   # user sign_up
   get '/sign_up', to: 'users#new'
   post '/sign_up', to: 'users#create'
