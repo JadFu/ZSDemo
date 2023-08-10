@@ -1,39 +1,41 @@
 <h1>Shopping Cart</h1>
 
 <% if @cart_items.present? %>
-  <%= form_tag update_cart_cart_path, method: :put do %>
-    <table>
-      <thead>
+  <table>
+    <thead>
+      <tr>
+        <th>Item Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Total</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cart_items.each do |item_id, quantity| %>
+        <% item = Item.find(item_id) %>
         <tr>
-          <th>Item Name</th>
-          <th>Quantity</th>
-          <th>Price</th>
-          <th>Total</th>
-          <th></th>
+          <td><%= link_to item.name, item_path(item) %></td>
+          <td>
+            <%= form_tag update_cart_cart_path, method: :put do %>
+              <%= number_field_tag :quantity, quantity, min: 1 %>
+              <%= hidden_field_tag :item_id, item_id %>
+              <%= button_tag 'Update', class: 'btn btn-primary' %>
+            <% end %>
+          </td>
+          <td><%= number_to_currency(item.price) %></td>
+          <td><%= number_to_currency(item.price * quantity) %></td>
+          <td>
+            <%= form_with url: remove_item_cart_path(item_id: item_id), method: :post, local: true do %>
+              <%= button_tag 'Remove', class: 'btn btn-danger' %>
+            <% end %>
+          </td>
         </tr>
-      </thead>
-      <tbody>
-        <% @cart_items.each do |item_id, quantity| %>
-          <% item = Item.find(item_id) %>
-          <tr>
-            <td><%= link_to item.name, item_path(item) %></td>
-            <td><%= number_field_tag "cart_items[#{item_id}]", quantity, min: 1 %></td>
-            <td><%= number_to_currency(item.price) %></td>
-            <td><%= number_to_currency(item.price * quantity) %></td>
-            <td>
-              <%= form_with url: remove_item_cart_path(item_id: item_id), method: :post, local: true do %>
-                <%= button_tag 'Remove', class: 'btn btn-danger' %>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+      <% end %>
+    </tbody>
+  </table>
 
-    <p>Total Price: <%= number_to_currency(@cart_items.sum { |item_id, quantity| Item.find(item_id).price * quantity }) %></p>
-
-    <%= submit_tag 'Update Cart', class: 'btn btn-primary' %>
-  <% end %>
+  <p>Total Price: <%= number_to_currency(@cart_items.sum { |item_id, quantity| Item.find(item_id).price * quantity }) %></p>
 
   <%= link_to 'Checkout', checkout_path, class: 'btn btn-primary' %>
 <% else %>
@@ -41,3 +43,4 @@
 <% end %>
 
 <%= link_to 'Back to Items', items_path, class: 'btn btn-secondary' %>
+

@@ -17,9 +17,6 @@ Rails.application.routes.draw do
   # cart resource
   resource :cart, only: [:show] do
     post 'remove_item', to: 'carts#remove_item', as: 'remove_item'
-  end
-
-  resource :cart, only: [:show] do
     put :update_cart, on: :collection, as: :update_cart
     get :checkout, on: :member, as: :checkout # Route for checkout.html.erb
     get :confirm_checkout, on: :member, as: :confirm_checkout # Route for confirm_checkout.html.erb

@@ -34,11 +34,17 @@ class CartsController < ApplicationController
     end
 
     def update_cart
-      cart_items_params.each do |item_id, quantity|
-        session[:cart][item_id] = quantity.to_i if quantity.to_i.positive?
+      item_id = params[:item_id]
+      quantity = params[:quantity].to_i
+    
+      if session[:cart] && session[:cart][item_id] && quantity.positive?
+        session[:cart][item_id] = quantity
+        flash[:notice] = 'Item quantity updated successfully.'
+      else
+        flash[:alert] = 'Unable to update item quantity.'
       end
-  
-      redirect_to cart_path, notice: 'Cart updated successfully.'
+    
+      redirect_to cart_path
     end
 
     def initiate_payment_link
