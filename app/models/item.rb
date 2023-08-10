@@ -1,7 +1,5 @@
 class Item < ApplicationRecord
     has_many :order_items
-
-    # add associations here
     belongs_to :category
   
     def self.ransackable_attributes(auth_object = nil)
@@ -15,8 +13,9 @@ class Item < ApplicationRecord
     def self.ransackable_attributes(auth_object = nil)
         ["created_at", "id", "item_id", "order_id", "price_ATM", "quantity", "updated_at"]
     end
-    # add validations here
+    #validations
     validates :name, presence: true
+    validates :category_id, presence: true
     validates :information, presence: true
     validates :price, presence: true
     validates :image, presence: true

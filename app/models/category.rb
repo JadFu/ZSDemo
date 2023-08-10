@@ -1,7 +1,7 @@
 class Category < ApplicationRecord
     has_many :items
 
-    # add validations here
+    #validations
     validates :name, presence: true, uniqueness: true
   
     def self.ransackable_attributes(auth_object = nil)
@@ -11,5 +11,4 @@ class Category < ApplicationRecord
     def self.ransackable_associations(auth_object = nil)
       ["items"]
     end
-    # add associations here (if any)
   end

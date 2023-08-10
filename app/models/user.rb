@@ -2,12 +2,12 @@ class User < ApplicationRecord
     has_many :orders
     belongs_to :tax
 
-    # add validations here
+    #validations
     validates :email, presence: true, uniqueness: true
     validates :password, presence: true
     validates :address, presence: true
-  
-    # add associations here (if any)
+    validates :tax_id, presence: true
+
     before_save :set_default_role
 
     private
