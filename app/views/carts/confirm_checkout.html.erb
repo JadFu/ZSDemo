@@ -36,31 +36,5 @@
 <p>HST Amount: <%= number_to_currency(@total_hst) %></p>
 <p>Total Price After Tax: <%= number_to_currency(@total_price_after_tax) %></p>
 
-<<<<<<< HEAD
-<%= link_to 'Proceed to Payment', '#', id: 'paypal-button', class: 'btn btn-primary' %>
-<script src="https://www.paypal.com/sdk/js?client-id=<%= ENV['PAYPAL_CLIENT_ID'] %>"></script>
-<script>
-  paypal.Buttons({
-    createOrder: function(data, actions) {
-      return actions.order.create({
-        purchase_units: [{
-          amount: {
-            value: '<%= @total_price_after_tax %>' // Use the total price after tax
-          }
-        }]
-      });
-    },
-    onApprove: function(data, actions) {
-      return actions.order.capture().then(function(details) {
-        // Handle successful payment, e.g., show a success message
-        alert('Payment completed successfully!');
-        // You can also make an AJAX request to your server to update the order status, etc.
-      });
-    }
-  }).render('#paypal-button');
-</script>
-
-=======
 <%= link_to 'Proceed to Payment', initiate_payment_link_path, method: :post, class: 'btn btn-primary' %>
->>>>>>> cart
 <%= link_to 'Back to Cart', cart_path, class: 'btn btn-secondary' %>

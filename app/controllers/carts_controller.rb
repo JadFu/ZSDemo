@@ -59,6 +59,7 @@ class CartsController < ApplicationController
     
         # You can pass the Payment Intent's client secret to the front end to confirm the payment
         @client_secret = payment_intent.client_secret
+        session[:payment_intent_id] = payment_intent.id
     
         # Redirect or render as needed
         render 'payment_confirmation'
@@ -70,11 +71,11 @@ class CartsController < ApplicationController
 
     def success
       @cart_items = session[:cart] || {}
-    
+      payment_intent_id = session[:payment_intent_id]
       if session[:user_id]
         timemark = Time.current
         @user = User.find(session[:user_id])
-        @order = Order.new(user_id: @user.id, status_id: Status.find_by(name: 'paid').id, discount: 0, date_create: timemark)
+        @order = Order.new(user_id: @user.id, status_id: Status.find_by(name: 'paid').id, stripe_payment_intent_id: payment_intent_id, discount: 0, date_create: timemark)
         if @order.save
           @createdOrder = Order.find_by(date_create: timemark)
           @cart_items.each do |item_id, quantity|

@@ -1,6 +1,11 @@
 <!-- app/views/orders/show.html.erb -->
 <h1>Order Details - Order ##<%= @order.id %></h1>
 
+<h2>Payment Details</h2>
+<p><strong>Stripe Payment Intent ID:</strong> <%= @order.stripe_payment_intent_id %></p>
+<p><strong>Payment Status:</strong> <%= @order.status.name %></p> <%# Assuming you have a status model with name %>
+
+<h2>Order Items</h2>
 <table>
   <thead>
     <tr>
@@ -24,5 +29,3 @@
 </table>
 
 <%= link_to 'Back to User Page', user_path(@order.user_id), class: 'btn btn-secondary' %>
-
-
