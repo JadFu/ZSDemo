@@ -1,5 +1,17 @@
 Rails.application.routes.draw do
+  devise_for :users
+  # Devise for admin_users should be defined only once
   devise_for :admin_users, ActiveAdmin::Devise.config
+  namespace :admin do
+    # Add the new OrderItem resource inside the namespace block
+    resources :users
+    resources :statuses
+    resources :categories
+    resources :taxes
+    resources :items
+    resources :orders
+    resources :order_items
+  end
   ActiveAdmin.routes(self)
 
   root to:'items#index'
@@ -38,3 +50,4 @@ Rails.application.routes.draw do
   resources :orders, only: [:new, :show]
   get '/users/:id', to: 'users#show', as: 'user'
 end
+

@@ -289,6 +289,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin
   bcrypt
+  activestorage
   bootsnap
   capybara
   debug
@@ -300,6 +301,7 @@ DEPENDENCIES
   paypal-sdk-rest
   puma (~> 5.0)
   rails (~> 7.0.5)
+  ransack
   sassc
   selenium-webdriver
   sprockets-rails

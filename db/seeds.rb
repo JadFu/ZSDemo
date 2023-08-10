@@ -6,14 +6,15 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 # AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+# AdminUser.create(email: 'admin@zstech.ca', password: 'password', password_confirmation: 'password')
 require 'faker'
 
+OrderItem.delete_all
+Order.delete_all
 Item.delete_all
 Category.delete_all
 Tax.delete_all
 User.delete_all
-Order.delete_all
-OrderItem.delete_all
 
 def random_decimal(range)
   rand(range) / 100.0

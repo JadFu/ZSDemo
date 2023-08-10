@@ -14,6 +14,15 @@ gem 'bcrypt'
 # webpacker
 gem 'webpacker'
 
+# device
+gem 'devise'
+
+# active storage
+gem 'activestorage'
+
+# ransack?
+gem 'ransack'
+
 # paginated
 gem 'kaminari'
 
