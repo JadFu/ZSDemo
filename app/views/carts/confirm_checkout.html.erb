@@ -36,6 +36,7 @@
 <p>HST Amount: <%= number_to_currency(@total_hst) %></p>
 <p>Total Price After Tax: <%= number_to_currency(@total_price_after_tax) %></p>
 
+<<<<<<< HEAD
 <%= link_to 'Proceed to Payment', '#', id: 'paypal-button', class: 'btn btn-primary' %>
 <script src="https://www.paypal.com/sdk/js?client-id=<%= ENV['PAYPAL_CLIENT_ID'] %>"></script>
 <script>
@@ -59,4 +60,7 @@
   }).render('#paypal-button');
 </script>
 
+=======
+<%= link_to 'Proceed to Payment', initiate_payment_link_path, method: :post, class: 'btn btn-primary' %>
+>>>>>>> cart
 <%= link_to 'Back to Cart', cart_path, class: 'btn btn-secondary' %>
