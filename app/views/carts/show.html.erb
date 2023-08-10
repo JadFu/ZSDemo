@@ -9,6 +9,7 @@
           <th>Quantity</th>
           <th>Price</th>
           <th>Total</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -19,6 +20,11 @@
             <td><%= number_field_tag "cart_items[#{item_id}]", quantity, min: 1 %></td>
             <td><%= number_to_currency(item.price) %></td>
             <td><%= number_to_currency(item.price * quantity) %></td>
+            <td>
+              <%= form_with url: remove_item_cart_path(item_id: item_id), method: :post, local: true do %>
+                <%= button_tag 'Remove', class: 'btn btn-danger' %>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </tbody>

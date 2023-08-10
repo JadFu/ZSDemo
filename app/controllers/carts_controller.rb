@@ -1,6 +1,8 @@
 require 'stripe'
 
 class CartsController < ApplicationController
+   skip_before_action :verify_authenticity_token, only: :update_cart
+
     def show
       @cart_items = session[:cart] || {}
     end
@@ -90,6 +92,18 @@ class CartsController < ApplicationController
       end
     
       render 'carts/success'
+    end
+    
+
+    def remove_item
+      item_id = params[:item_id]
+      if session[:cart] && session[:cart][item_id]
+        session[:cart].delete(item_id)
+        flash[:notice] = 'Item removed from cart successfully.'
+      else
+        flash[:alert] = 'Item not found in cart.'
+      end
+      redirect_to cart_path
     end
     
 

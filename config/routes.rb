@@ -13,7 +13,12 @@ Rails.application.routes.draw do
   post '/confirm_checkout', to: 'carts#confirm_checkout', as: 'confirm_checkout'
 
   get '/initiate_payment_link', to: 'carts#initiate_payment_link', as: 'initiate_payment_link'
+
   # cart resource
+  resource :cart, only: [:show] do
+    post 'remove_item', to: 'carts#remove_item', as: 'remove_item'
+  end
+
   resource :cart, only: [:show] do
     put :update_cart, on: :collection, as: :update_cart
     get :checkout, on: :member, as: :checkout # Route for checkout.html.erb
