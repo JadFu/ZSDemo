@@ -1,31 +1,34 @@
 <!-- app/views/orders/show.html.erb -->
 <h1>Order Details - Order ##<%= @order.id %></h1>
 
-<h2>Payment Details</h2>
-<p><strong>Stripe Payment Intent ID:</strong> <%= @order.stripe_payment_intent_id %></p>
-<p><strong>Payment Status:</strong> <%= @order.status.name %></p> <%# Assuming you have a status model with name %>
+<div class="container mt-4">
+  <h2>Payment Details</h2>
+  <p><strong>Stripe Payment Intent ID:</strong> <%= @order.stripe_payment_intent_id %></p>
+  <p><strong>Payment Status:</strong> <%= @order.status.name %></p> <%# Assuming you have a status model with name %>
 
-<h2>Order Items</h2>
-<table>
-  <thead>
-    <tr>
-      <th>Item Name</th>
-      <th>Quantity</th>
-      <th>Price</th>
-      <th>Total</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @order_items.each do |order_item| %>
-      <% item = Item.find(order_item.item_id) %>
+  <h2>Order Items</h2>
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td><%= link_to item.name, item_path(item) %></td>
-        <td><%= order_item.quantity %></td>
-        <td><%= number_to_currency(order_item.price_ATM) %></td>
-        <td><%= number_to_currency(order_item.quantity * order_item.price_ATM) %></td>
+        <th>Item Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Total</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @order_items.each do |order_item| %>
+        <% item = Item.find(order_item.item_id) %>
+        <tr>
+          <td><%= link_to item.name, item_path(item) %></td>
+          <td><%= order_item.quantity %></td>
+          <td><%= number_to_currency(order_item.price_ATM) %></td>
+          <td><%= number_to_currency(order_item.quantity * order_item.price_ATM) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
 
 <%= link_to 'Back to User Page', user_path(@order.user_id), class: 'btn btn-secondary' %>

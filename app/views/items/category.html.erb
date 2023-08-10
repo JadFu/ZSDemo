@@ -1,24 +1,28 @@
-<h1>Items in Category: <%= @category.name %></h1>
+<h1 class="mb-4">Items in Category: <%= @category.name %></h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Category</th>
-      <th>Price</th>
-      <th>Information</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @items.each do |item| %>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td><%= link_to item.name, item_path(item) %></td>
-        <td><%= link_to item.category.name, item_path(item) %></td>
-        <td><%= link_to item.price, item_path(item) %></td>
-        <td><%= link_to item.information, item_path(item) %></td>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Information</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @items.each do |item| %>
+        <tr>
+          <td><%= link_to item.name, item_path(item) %></td>
+          <td><%= link_to item.category.name, item_path(item) %></td>
+          <td><%= link_to number_to_currency(item.price), item_path(item) %></td>
+          <td><%= link_to item.information, item_path(item) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
-<%= paginate @items %>
+<div class="d-flex justify-content-center">
+  <%= paginate @items %>
+</div>

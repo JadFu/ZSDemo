@@ -1,21 +1,27 @@
-<% if @user %>
-  <h1>Welcome <%= @user.email %>!</h1>
+<div class="container mt-5">
+  <% if @user %>
+    <h1>Welcome <%= @user.email %>!</h1>
 
-  <h2>Your Orders</h2>
-  <% if @orders.any? %>
-  <ul>
-    <% @orders.each do |order| %>
-      <li>
-        <%= link_to "Order ##{order.id}", order_path(order.id) %>
-      </li>
+    <h2>Your Orders</h2>
+    <% if @orders.any? %>
+      <table class="table">
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr>
+              <td>
+                <%= link_to "Order ##{order.id}", order_path(order.id) %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>You have no orders.</p>
     <% end %>
-  </ul>
-<% else %>
-  <p>You have no orders.</p>
-<% end %>
 
-  <%= link_to 'Back to Items', items_path, class: 'btn btn-secondary' %>
-<% else %>
-  <p>Please log in to view this page.</p>
-  <%= link_to 'Log in', login_path %>
-<% end %>
+    <%= link_to 'Back to Items', items_path, class: 'btn btn-secondary' %>
+  <% else %>
+    <p>Please log in to view this page.</p>
+    <%= link_to 'Log in', login_path, class: 'btn btn-primary' %>
+  <% end %>
+</div>

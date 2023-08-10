@@ -1,7 +1,7 @@
-<h1>Shopping Cart</h1>
+<h1 class="mb-4">Shopping Cart</h1>
 
 <% if @cart_items.present? %>
-  <table>
+  <table class="table table-striped">
     <thead>
       <tr>
         <th>Item Name</th>
@@ -18,9 +18,11 @@
           <td><%= link_to item.name, item_path(item) %></td>
           <td>
             <%= form_tag update_cart_cart_path, method: :put do %>
-              <%= number_field_tag :quantity, quantity, min: 1 %>
-              <%= hidden_field_tag :item_id, item_id %>
-              <%= button_tag 'Update', class: 'btn btn-primary' %>
+              <div class="form-group">
+                <%= number_field_tag :quantity, quantity, min: 1, class: 'form-control' %>
+                <%= hidden_field_tag :item_id, item_id %>
+                <%= button_tag 'Update', class: 'btn btn-primary mt-2' %>
+              </div>
             <% end %>
           </td>
           <td><%= number_to_currency(item.price) %></td>
@@ -35,12 +37,11 @@
     </tbody>
   </table>
 
-  <p>Total Price: <%= number_to_currency(@cart_items.sum { |item_id, quantity| Item.find(item_id).price * quantity }) %></p>
+  <p class="mb-4">Total Price: <%= number_to_currency(@cart_items.sum { |item_id, quantity| Item.find(item_id).price * quantity }) %></p>
 
   <%= link_to 'Checkout', checkout_path, class: 'btn btn-primary' %>
 <% else %>
   <p>Your cart is empty.</p>
 <% end %>
 
-<%= link_to 'Back to Items', items_path, class: 'btn btn-secondary' %>
-
+<%= link_to 'Back to Items', items_path, class: 'btn btn-secondary mt-3' %>

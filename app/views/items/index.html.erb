@@ -1,31 +1,32 @@
-<h1>All Items</h1>
+<h1 class="mb-4">All Items</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Category</th>
-      <th>Price</th>
-      <th>Information</th>
-      <th>Add to Cart</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @items.each do |item| %>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td><%= link_to item.name, item_path(item) %></td>
-        <td><%= link_to item.category.name, item_path(item) %></td>
-        <td><%= link_to item.price, item_path(item) %></td>
-        <td><%= link_to item.information, item_path(item) %></td>
-        <td>
-          <%= button_to 'Add to Cart', add_to_cart_path(item), method: :post, remote: true, class: 'btn btn-primary' %>
-        </td>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Information</th>
+        <th>Add to Cart</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @items.each do |item| %>
+        <tr>
+          <td><%= link_to item.name, item_path(item) %></td>
+          <td><%= link_to item.category.name, item_path(item) %></td>
+          <td><%= link_to number_to_currency(item.price), item_path(item) %></td>
+          <td><%= link_to item.information, item_path(item) %></td>
+          <td>
+            <%= button_to 'Add to Cart', add_to_cart_path(item), method: :post, remote: true, class: 'btn btn-primary' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
-<%= paginate @items %>
-
-
-
+<div class="d-flex justify-content-center">
+  <%= paginate @items %>
+</div>
