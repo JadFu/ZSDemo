@@ -5,15 +5,19 @@ Rails.application.routes.draw do
   root to:'items#index'
 
   resources :items
+  resources :taxes
   get 'items/category/:id', to: 'items#category', as: :items_category
   get '/cart', to: 'carts#show', as: 'cart'
   get 'checkout', to: 'carts#checkout'
   post '/add_to_cart/:id', to: 'carts#add_to_cart', as: :add_to_cart
   post '/confirm_checkout', to: 'carts#confirm_checkout', as: 'confirm_checkout'
 
+  get '/initiate_payment_link', to: 'carts#initiate_payment_link', as: 'initiate_payment_link'
   # cart resource
   resource :cart, only: [:show] do
     put :update_cart, on: :collection, as: :update_cart
+    get :checkout, on: :member, as: :checkout # Route for checkout.html.erb
+    get :confirm_checkout, on: :member, as: :confirm_checkout # Route for confirm_checkout.html.erb
   end
 
   # user sign_up
