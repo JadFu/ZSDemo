@@ -16,6 +16,9 @@ Rails.application.routes.draw do
 
   root to:'items#index'
 
+  get 'contact', to: 'pages#contact'
+  get 'about', to: 'pages#about'
+
   resources :items
   resources :taxes
   get 'items/category/:id', to: 'items#category', as: :items_category
