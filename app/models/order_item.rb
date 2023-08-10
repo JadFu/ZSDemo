@@ -6,8 +6,6 @@ class OrderItem < ApplicationRecord
         ["created_at", "id", "item_id", "order_id", "price_ATM", "quantity", "updated_at"]
     end
     #validations
-    validates :order_id, presence: true
-    validates :user_id, presence: true
     validates :price_ATM, presence: true
     validates :quantity, presence: true
 end
