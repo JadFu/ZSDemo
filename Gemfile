@@ -3,6 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.1.2"
 
+#payment
+gem 'paypal-sdk-rest'
+
 # password
 gem 'bcrypt'
 
