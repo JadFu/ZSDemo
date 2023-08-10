@@ -14,6 +14,7 @@
         <th>Quantity</th>
         <th>Price</th>
         <th>Total</th>
+        <th>Tax</th>
       </tr>
     </thead>
     <tbody>
@@ -24,6 +25,7 @@
           <td><%= order_item.quantity %></td>
           <td><%= number_to_currency(order_item.price_ATM) %></td>
           <td><%= number_to_currency(order_item.quantity * order_item.price_ATM) %></td>
+          <td><%= number_to_currency(order_item.quantity * order_item.price_ATM * @tax_rate) %></td>
         </tr>
       <% end %>
     </tbody>
